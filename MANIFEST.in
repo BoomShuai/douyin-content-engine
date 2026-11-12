@@ -1,0 +1,12 @@
+include README.md PRIVACY.md CONTRIBUTING.md SECURITY.md CHANGELOG.md
+include start.command start.bat setup.sh requirements-model.txt
+recursive-include douyin_engine *.py *.json *.html *.js *.css
+recursive-include docs *.md
+recursive-include scripts *.py *.cjs
+recursive-include tests *.py
+global-exclude *.pyc *.pyo
+prune models
+prune artifacts
+prune private
+prune output
+prune outputs
