@@ -63,7 +63,7 @@ async function loadHealth() {
     const states={ready:"本地模型就绪",loaded:"本地模型已加载",available:"本地模型可用",not_loaded:"模型可用 · 按需加载",lazy:"模型可用 · 按需加载",missing:"服务在线 · 规则可用 / 模型未配置",unavailable:"模型暂不可用",error:"模型加载异常"};
     badge.append(document.createTextNode(states[model.status]||`本地服务在线 · ${model.status||"可用"}`));
     badge.classList.toggle("offline",["unavailable","error"].includes(model.status));
-    $("version").textContent=`v${state.health.version||"1.0.0"}`;
+    $("version").textContent=`v${state.health.version||"1.0.1"}`;
     const limits=state.health.limits||{};
     $("data-limit").textContent=limits.max_rows?`每批最多 ${fmt(limits.max_rows)} 条${limits.max_bytes?` · ${Math.round(number(limits.max_bytes)/1048576)} MB`:""} · 仅本机处理`:"仅本机处理 · 不自动采集平台数据";
   } catch(error) {

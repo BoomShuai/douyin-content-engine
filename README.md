@@ -93,8 +93,8 @@ API、字段与错误码见 [API.md](docs/API.md)。只绑定 `127.0.0.1`，不�
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 node scripts/test_frontend.cjs
 python3 scripts/privacy_check.py --history
-python3 scripts/build_release.py --output dist/douyin-content-engine-v1.0.0.zip
-python3 scripts/verify_release.py dist/douyin-content-engine-v1.0.0.zip
+python3 scripts/build_release.py --output dist/douyin-content-engine-v1.0.1.zip
+python3 scripts/verify_release.py dist/douyin-content-engine-v1.0.1.zip
 ```
 
 Node.js 只用于开发时的前端检查。源码 ZIP 附带 SHA-256 清单，打包白名单主动排除模型、原始数据、个人文档、运行结果及历史评测。它不依赖 Git LFS，不打包虚拟环境或第三方运行库。

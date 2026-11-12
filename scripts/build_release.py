@@ -19,7 +19,7 @@ else:
     from privacy_check import inspect as inspect_public_file
 
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 CHUNK_BYTES = 1024 * 1024
 MANIFEST_NAME = "MANIFEST.json"
 EXACT_FILES = frozenset({"douyin_engine/data/demo.json"})

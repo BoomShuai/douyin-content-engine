@@ -35,7 +35,7 @@ def main():
         fixture.write_text(json.dumps(records, ensure_ascii=False), encoding="utf-8")
         output = Path(directory) / "result.json"
         process = subprocess.run([sys.executable, "-I", "-m", "douyin_engine", "analyze", str(fixture), "--source-name", "synthetic_demo", "--output", str(output)], cwd=directory, capture_output=True)
-        assert process.returncode == 0, "Installed CLI failed"
+        assert process.returncode == 0, "Installed CLI failed: " + process.stderr.decode("utf-8", "replace")
         assert json.loads(output.read_text(encoding="utf-8"))["summary"]["total"] == 36
     print("PASS: installed package, synthetic analysis, HTTP assets and CLI outside source tree")
 

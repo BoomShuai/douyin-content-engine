@@ -4,6 +4,10 @@ import sys
 
 
 def main(argv=None):
+    # Isolated Python ignores PYTHONUTF8; JSON output still has to be UTF-8.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     argv = list(sys.argv[1:] if argv is None else argv)
     command = argv[0] if argv else None
     if command == "serve":

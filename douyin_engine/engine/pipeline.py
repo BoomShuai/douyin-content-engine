@@ -5,6 +5,7 @@ import hashlib
 import io
 import json
 import time
+import uuid
 from datetime import datetime, timezone
 
 from . import __version__
@@ -46,7 +47,7 @@ class AnalysisEngine:
             warnings.append("部分输入未进入分析，请查看数据质量记录与逐行原因。")
         warnings.append(ingest["privacy_note"])
         now = datetime.now(timezone.utc).isoformat()
-        result.update({"version": __version__, "run_id": input_hash[:12] + "-" + str(time.time_ns()),
+        result.update({"version": __version__, "run_id": input_hash[:12] + "-" + uuid.uuid4().hex,
                        "created_at": now, "backend": backend,
                        "model": self.model.status() if backend == "model" else {"name": "规则启发式 v1.0", "status": "rules", "device": "cpu"},
                        "ingest": ingest, "elapsed_seconds": round(time.perf_counter() - started, 4),

@@ -81,7 +81,7 @@ class HTTPTests(unittest.TestCase):
         self.assertEqual(status, 200)
         data = json.loads(body)
         self.assertTrue(data["ok"])
-        self.assertEqual(data["version"], "1.0.0")
+        self.assertEqual(data["version"], "1.0.1")
         self.assertEqual(data["limits"], {"max_rows": MAX_ROWS, "max_bytes": MAX_BYTES})
         self.assertEqual(data["model"]["status"], "missing")
         self.assertIsNone(self.engine.model.model)
@@ -119,7 +119,7 @@ class HTTPTests(unittest.TestCase):
         actual = json.loads(body)
         self.assertIn("available", actual)
         if actual["available"]:
-            self.assertEqual(actual["version"], "1.0.0")
+            self.assertEqual(actual["version"], "1.0.1")
             self.assertIn("model_files", actual)
             self.assertIn("sources", actual)
         with tempfile.TemporaryDirectory(prefix="content-engine-evidence-absent-") as directory, patch("douyin_engine.server.ROOT", Path(directory)):

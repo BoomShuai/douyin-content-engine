@@ -19,6 +19,14 @@ def fixture_rows():
 
 
 class PipelineTests(unittest.TestCase):
+    def test_run_ids_do_not_collide_when_wall_clock_is_frozen(self):
+        engine = AnalysisEngine()
+        with patch("douyin_engine.engine.pipeline.time.time_ns", return_value=1):
+            first = engine.analyze({"records": fixture_rows(), "backend": "rules"})
+            second = engine.analyze({"records": fixture_rows(), "backend": "rules"})
+        self.assertEqual(first["provenance"]["input_sha256"], second["provenance"]["input_sha256"])
+        self.assertNotEqual(first["run_id"], second["run_id"])
+
     def test_default_backend_is_zero_dependency_rules(self):
         engine = AnalysisEngine()
         with patch.object(engine.model, "load", side_effect=AssertionError("default must not load weights")):

@@ -16,6 +16,16 @@ spec.loader.exec_module(privacy)
 
 
 class PublicProjectTests(unittest.TestCase):
+    def test_cli_handles_a_non_utf8_console(self):
+        buffer = io.BytesIO()
+        stream = io.TextIOWrapper(buffer, encoding="ascii", write_through=True)
+        try:
+            with contextlib.redirect_stdout(stream), contextlib.redirect_stderr(io.StringIO()):
+                self.assertEqual(main(["doctor"]), 0)
+            self.assertIn("规则模式", buffer.getvalue().decode("utf-8"))
+        finally:
+            stream.detach()
+
     def test_release_rejects_private_content_in_approved_document(self):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory).resolve()
